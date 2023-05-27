@@ -2,7 +2,7 @@ version: 2
 jobs:
   one:
     docker:
-      - image: cimg/ruby:2.6.8
+      - image: cimg/ruby:3.0.2
     auth:
       username: mydockerhub-user
       password: $DOCKERHUB_PASSWORD
@@ -15,6 +15,7 @@ jobs:
           root: my_workspace
           paths:
             - echo-output
+
   two:
     docker:
       - image: cimg/ruby:3.0.2
@@ -33,3 +34,10 @@ jobs:
             echo "nope!"
             exit 1
           fi
+
+workflows:
+  version: 2
+  one_and_two:
+    jobs:
+      - one
+      - two
