@@ -23,11 +23,10 @@ jobs:
       password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - run: echo "A more familiar hie"
       - attach_workspace:
           at: my_workspace
       - run: |
-          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
+          if [[ $(cat my_workspace/echo-output 2>/dev/null) == "Trying out workspaces" ]]; then
             echo "It worked!"
           else
             echo "nope"
