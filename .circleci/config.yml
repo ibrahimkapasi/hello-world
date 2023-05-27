@@ -1,16 +1,8 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: cimg/ruby:3.0.2
-    steps:
-      - checkout
-      - run: echo "Building..."
-      # Add more steps as needed for the build job
-
   one:
     docker:
-      - image: cimg/ruby:3.0.2
+      - image: cimg/ruby:2.6.8
     auth:
       username: mydockerhub-user
       password: $DOCKERHUB_PASSWORD
@@ -31,8 +23,6 @@ jobs:
       username: mydockerhub-user
       password: $DOCKERHUB_PASSWORD
     steps:
-      - checkout
-      - run: echo "A more familiar Hi"
       - attach_workspace:
           at: my_workspace
       - run: |
@@ -42,11 +32,3 @@ jobs:
             echo "nope!"
             exit 1
           fi
-
-workflows:
-  version: 2
-  one_and_two:
-    jobs:
-      - build
-      - one
-      - two
